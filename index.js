@@ -29,7 +29,7 @@ app.get('/api/event/storage/create', (req, res) => {
   // console.log(`resource file: ${resource_file}`);
   
   const bucket_name = 'run-config';
-  const resource_file = '/test/ssh.sh';
+  const resource_file = 'ssh.sh';
   
   const bucket = storage.bucket(bucket_name);
   const file = bucket.file(resource_file);
@@ -51,7 +51,7 @@ app.get('/api/event/storage/create', (req, res) => {
 app.post('/api/event/storage/message', (req, res) => {
   console.log(`Message consumer`);
   const content = req.body.content.toString();
-  uploadObject('test-upload-file.txt', content);
+  uploadObject('/test/test-upload-file.txt', content);
   res.send(`success!`);
 });
 

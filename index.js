@@ -51,7 +51,7 @@ app.get('/api/event/storage/create', (req, res) => {
 app.post('/api/event/storage/message', (req, res) => {
   console.log(`Message consumer`);
   const content = req.body.content.toString();
-  uploadObject('/test/test-upload-file.txt', content);
+  uploadObject('test/test-upload-file.txt', content);
   res.send(`success!`);
 });
 

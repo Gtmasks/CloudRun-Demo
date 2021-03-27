@@ -29,7 +29,7 @@ app.get('/api/event/storage/create', (req, res) => {
   // console.log(`resource file: ${resource_file}`);
   
   const bucket_name = 'run-config';
-  const resource_file = 'ssh.sh';
+  const resource_file = '/test/ssh.sh';
   
   const bucket = storage.bucket(bucket_name);
   const file = bucket.file(resource_file);

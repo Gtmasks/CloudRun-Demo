@@ -2,7 +2,7 @@ const { Storage } = require('@google-cloud/storage');
 const moment = require('moment')
 const uuid = require('uuid')
 const storage = new Storage();
-const bucket = storage.bucket('run-config');
+const bucket = storage.bucket('global-config');
 
 /**
  * Storage Base Class
@@ -41,13 +41,17 @@ module.exports = class Storage {
     if (!Array.isArray(data)) {
       data = [data];
     }
+    for (let i = 0; i < data.length; i++) {
+      data[i] = this.dataProcessor(data[i]);
+    }
     const { brand } = data[0];
+    console.log(data[0]);
     const nowStr = moment().format('YYYY-MM-DD-HH-mm-ss-SSS')
-    const [y, m, d, h, mi, s, ms] = nowStr.split(',');
-    const folder = `/prod/${brand}/${y}/${m}/${d}`;
-    const file = bucket.file(`${folder}/${nowStr}_${uuid.v4()}.txt`);
+    const [y, m, d, h, mi, s, ms] = nowStr.split('-');
+    const folder = `prod/${brand}/${y}/${m}/${d}`;
+    console.log(folder, ' ', `${folder}/${nowStr}-${uuid.v4()}.txt`, '  ');
+    const file = bucket.file(`${folder}/${nowStr}-${uuid.v4()}.txt`);
     const content = JSON.stringify(data)
-    console.log(content);
     await new Promise((resolve, reject) => {
       file.save(content, function (err) {
         if (err) {

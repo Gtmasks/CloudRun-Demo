@@ -2,7 +2,7 @@ const { Storage } = require('@google-cloud/storage');
 const moment = require('moment')
 const uuid = require('uuid')
 const storage = new Storage();
-const bucket = storage.bucket('global-config');
+const bucket = storage.bucket('run-config');
 
 /**
  * Storage Base Class
